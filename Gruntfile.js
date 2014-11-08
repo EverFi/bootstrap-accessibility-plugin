@@ -54,8 +54,23 @@ module.exports = function(grunt) {
 					'src/js/carousel.js'
 				],
 	        	dest: 'plugins/js/bootstrap-accessibility.js'
-	       	} 
-	    },
+	       	},
+        fn: {
+          options: {
+            banner: '<%= license %>\n\n(function (root, factory) {\n  root.bsCompatibility = root.bsCompatibility || factory();\n}(this, function(){\n  var bsCompatibility = {\n    execute: function ($) {\n      "use strict";\n',
+            footer: '      }\n  };\n\n  return bsCompatibility;\n}));'
+          },
+          src: [
+            'src/js/functions.js',
+            'src/js/modal.js',
+            'src/js/dropdown.js',
+            'src/js/tab.js',
+            'src/js/collapse.js',
+            'src/js/carousel.js'
+          ],
+          dest: 'plugins/js/bootstrap-accessibility-fn.js'
+        }
+      },
 
 		uglify: {
 			options: {
@@ -65,7 +80,8 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js'
+					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js',
+					'plugins/js/bootstrap-accessibility-fn.min.js': 'plugins/js/bootstrap-accessibility-fn.js'
 				}
 			}
 		},
